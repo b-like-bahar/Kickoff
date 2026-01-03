@@ -1,0 +1,42 @@
+---
+alwaysApply: true
+---
+
+## Tech Stack & Architecture
+
+### Core Technologies
+- node version 20+
+- pnpm
+- React
+- react-hook-form
+- react-query
+- tailwind
+- Radix
+- Shadcn
+- zod
+- NextJS
+- Typescript
+- Supabase
+- Playwright
+- Github actions
+---
+
+### Documentation Policy
+- **DO NOT** create documentation or README files unless requested
+---
+
+## Testing
+- When adding new changes, make sure to analyze our existing end to end tests under `./e2e` and add the tests in the pertinent file or create a new file if necessary.
+
+## Design System
+- use the components inside ./components to construct UI when possible
+- When creating new generic UI components, add a story to storybook which includes all possible permutations
+
+## Database
+When updating anything database related:
+- Create a new migration file with only the necessary changes
+- make sure to run `pnpm supabase:db:reset` so the latest changes are applied locally
+- generate the latest types by running `pnpm supabase:generate:types`
+
+## Notes
+- Don't use interfaces in Typescript, use Type instead.

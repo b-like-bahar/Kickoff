@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+when creating react components:
+- If a file starts getting too long (400+ lines) separate into different components
+- This repository is using NextJS 15, Shadcn, Radix and Tailwind

@@ -1,0 +1,8 @@
+{
+  "search.exclude": {
+    "public/illustrations/undraw/**": true
+  },
+  "files.watcherExclude": {
+    "public/illustrations/undraw/**": true
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "next dev --turbopack"
+    },
+    {
+      "type": "npm",
+      "script": "storybook",
+      "problemMatcher": [],
+      "label": "npm: storybook",
+      "detail": "storybook dev -p 6006"
+    },
+    {
+      "type": "npm",
+      "script": "format",
+      "problemMatcher": [],
+      "label": "npm: format",
+      "detail": "prettier --write ."
+    },
+    {
+      "type": "npm",
+      "script": "format:check",
+      "problemMatcher": [],
+      "label": "npm: format:check",
+      "detail": "prettier --check ."
+    },
+    {
+      "type": "npm",
+      "script": "typecheck",
+      "problemMatcher": [],
+      "label": "npm: typecheck",
+      "detail": "tsc --noEmit"
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": [],
+      "label": "npm: lint",
+      "detail": "next lint"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build",
+      "detail": "next build"
+    },
+    {
+      "type": "npm",
+      "script": "supabase:generate:types",
+      "problemMatcher": [],
+      "label": "npm: supabase:generate:types",
+      "detail": "supabase gen types typescript --project-id pakbyzuicgipvfiozeka --schema public > types/supabase.ts"
+    },
+    {
+      "type": "npm",
+      "script": "supabase:start",
+      "problemMatcher": [],
+      "label": "npm: supabase:start",
+      "detail": "supabase start"
+    },
+    {
+      "type": "npm",
+      "script": "e2e:ui",
+      "problemMatcher": [],
+      "label": "npm: e2e:ui",
+      "detail": "playwright test --ui"
+    },
+    {
+      "type": "npm",
+      "script": "e2e",
+      "problemMatcher": [],
+      "label": "npm: e2e",
+      "detail": "playwright test"
+    },
+    {
+      "type": "npm",
+      "script": "supabase:db:reset",
+      "problemMatcher": [],
+      "label": "npm: supabase:db:reset",
+      "detail": "supabase db reset"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "npm: start",
+      "detail": "next start"
+    },
+    {
+      "type": "npm",
+      "script": "supabase:stop",
+      "problemMatcher": [],
+      "label": "npm: supabase:stop",
+      "detail": "supabase stop"
+    },
+    {
+      "type": "npm",
+      "script": "download:undraw",
+      "problemMatcher": [],
+      "label": "npm: download:undraw",
+      "detail": "tsx scripts/download-undraw.ts --color #f59e0b"
+    }
+  ]
+}

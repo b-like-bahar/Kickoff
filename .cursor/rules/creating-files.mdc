@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+when creating files in this project:
+- use kebab-case
+- refer to the project structure in [README.md](mdc:README.md)
