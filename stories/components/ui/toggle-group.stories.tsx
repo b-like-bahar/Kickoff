@@ -22,11 +22,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const SingleToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
+type ToggleGroupDemoArgs = Pick<
+  ComponentProps<typeof ToggleGroup>,
+  "variant" | "size" | "disabled" | "className"
+>;
+
+const SingleToggleGroupDemo = (args: ToggleGroupDemoArgs) => {
   const [value, setValue] = useState("italic");
 
   return (
-    <ToggleGroup {...args} type="single" value={value} onValueChange={setValue}>
+    <ToggleGroup
+      className={args.className}
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      type="single"
+      value={value}
+      onValueChange={setValue}
+    >
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <Bold className="size-4" />
       </ToggleGroupItem>
@@ -40,11 +53,19 @@ const SingleToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
   );
 };
 
-const MultipleToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
+const MultipleToggleGroupDemo = (args: ToggleGroupDemoArgs) => {
   const [value, setValue] = useState(["bold"]);
 
   return (
-    <ToggleGroup {...args} type="multiple" value={value} onValueChange={setValue}>
+    <ToggleGroup
+      className={args.className}
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      type="multiple"
+      value={value}
+      onValueChange={setValue}
+    >
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <Bold className="size-4" />
       </ToggleGroupItem>
@@ -58,11 +79,19 @@ const MultipleToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
   );
 };
 
-const TextAndIconToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
+const TextAndIconToggleGroupDemo = (args: ToggleGroupDemoArgs) => {
   const [value, setValue] = useState("left");
 
   return (
-    <ToggleGroup {...args} type="single" value={value} onValueChange={setValue}>
+    <ToggleGroup
+      className={args.className}
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      type="single"
+      value={value}
+      onValueChange={setValue}
+    >
       <ToggleGroupItem value="left" aria-label="Align left">
         <AlignLeft className="size-4" />
         <span className="sr-only md:not-sr-only md:ml-2">Left</span>
