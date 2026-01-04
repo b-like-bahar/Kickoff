@@ -6,6 +6,7 @@ import { routes } from "@/app/constants";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarUrl } from "@/utils/client-utils";
+import { LogoutButton } from "@/app/(logged-in)/settings/components/logout-button";
 
 export function Navbar({ avatarUrl, userId }: { avatarUrl: string | null; userId: string }) {
   const displayAvatarUrl = getAvatarUrl(avatarUrl);
@@ -38,6 +39,14 @@ export function Navbar({ avatarUrl, userId }: { avatarUrl: string | null; userId
                 </Link>
               </TooltipTrigger>
               <TooltipContent>Go to settings</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <LogoutButton />
+              </TooltipTrigger>
+              <TooltipContent> Logout</TooltipContent>
             </Tooltip>
           </TooltipProvider>
           <Link href={`${routes.protectedRoutes.userProfile}/${userId}`}>
