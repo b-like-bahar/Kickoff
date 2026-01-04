@@ -5,6 +5,11 @@ import { enablePostHog } from "@/utils/global-utils";
 
 const baseConfig: NextConfig = {
   /* config options here */
+  turbopack: {
+    // Prevent Next from incorrectly inferring the workspace root when multiple lockfiles exist
+    // elsewhere on the machine (e.g. `/Users/<name>/package-lock.json`).
+    root: process.cwd(),
+  },
 
   // Image optimization and handling configuration
   images: {
