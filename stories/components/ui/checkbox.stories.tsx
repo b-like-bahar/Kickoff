@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, type ComponentProps } from "react";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -36,8 +36,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function DefaultCheckbox(args: any) {
-  const [isChecked, setIsChecked] = useState(args.checked || false);
+function DefaultCheckbox(args: ComponentProps<typeof Checkbox>) {
+  const [isChecked, setIsChecked] = useState(args.checked === true);
 
   const handleCheckedChange = (checked: CheckedState) => {
     setIsChecked(checked === true);
