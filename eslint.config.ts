@@ -1,26 +1,46 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextConfig from "eslint-config-next";
+import prettierConfig from "eslint-config-prettier";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const nextConfigs = Array.isArray(nextConfig) ? nextConfig : [nextConfig];
+const nextConfigsWithOverrides = nextConfigs.map(config => {
+  if (config?.name === "next/typescript") {
+    return {
+      ...config,
+      rules: {
+        ...config.rules,
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-empty-object-type": "error",
+      },
+    };
+  }
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  return config;
 });
 
-const eslintConfig = [
-  ...compat.config({
-    extends: ["next", "prettier"],
-    parser: "@typescript-eslint/parser",
-    plugins: ["@typescript-eslint"],
+const config = [
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/out/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/coverage/**",
+    ],
+  },
+  // `eslint-config-next` (v16+) exports a Flat Config array, so we can spread it directly.
+  ...nextConfigsWithOverrides,
+  {
+    name: "kickoff/no-console",
     rules: {
-      "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-unused-vars": "error",
-      "@typescript-eslint/no-empty-object-type": "error",
       "no-console": "error",
     },
-  }),
+  },
+  {
+    name: "prettier",
+    rules: prettierConfig.rules,
+  },
 ];
 
-export default eslintConfig;
+export default config;
