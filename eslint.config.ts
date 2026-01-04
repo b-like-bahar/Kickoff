@@ -27,6 +27,10 @@ const config = [
       "**/dist/**",
       "**/build/**",
       "**/coverage/**",
+      "**/playwright-report/**",
+      "**/test-results/**",
+      "**/blob-report/**",
+      "**/.auth/**",
     ],
   },
   // `eslint-config-next` (v16+) exports a Flat Config array, so we can spread it directly.
