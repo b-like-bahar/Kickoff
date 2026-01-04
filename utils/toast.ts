@@ -7,11 +7,15 @@ type Props = {
   description?: string;
 };
 
+export const ToastTestId = "app-toast";
+export const ToastDismissButtonLabel = "Dismiss";
+
 export const toast = ({ type, message, description }: Props) => {
   const toastOptions = {
     description,
+    testId: ToastTestId,
     cancel: {
-      label: "Dismiss",
+      label: ToastDismissButtonLabel,
       onClick: () => {
         sonnerToast.dismiss();
       },
