@@ -18,8 +18,8 @@ export default function ClientConfirmationPage() {
   const subTitle = type === "sign-up" ? "Thank you for signing up for Kickoff" : undefined;
   const message =
     type === "sign-up"
-      ? `We've sent you an email with a confirmation link to ${email}. Please click on the link to complete your registration.`
-      : `We've sent you an email with a reset link to ${email}. Please click on the link to reset your password.`;
+      ? `We've sent a confirmation email to ${email}. Please check your inbox and click the link to complete your registration.`
+      : `We've sent a password reset email to ${email}. Please check your inbox and click the link to reset your password.`;
 
   return (
     <div
