@@ -2,7 +2,7 @@ import { type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/supabase-middleware";
 import { logger } from "@/utils/logger";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for") || "unknown";
   const ua = req.headers.get("user-agent") || "unknown";
   const method = req.method;
