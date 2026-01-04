@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { commentFormSchema, type CommentFormType } from "@/utils/validators";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
@@ -46,7 +46,8 @@ export default function CreateCommentDialog({
     },
   });
 
-  const characterCount = 280 - (form.watch("comment_text")?.length || 0);
+  const commentText = useWatch({ control: form.control, name: "comment_text" });
+  const characterCount = 280 - (commentText?.length || 0);
 
   const onSubmit = async (data: CommentFormType) => {
     const formData = new FormData();
@@ -90,7 +91,12 @@ export default function CreateCommentDialog({
           <DialogTitle>Add a comment</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={event => {
+              void form.handleSubmit(onSubmit)(event);
+            }}
+            className="space-y-4"
+          >
             <div className="flex gap-3">
               <UserInfo
                 avatar={getAvatarUrl(profile.avatar_url)}
