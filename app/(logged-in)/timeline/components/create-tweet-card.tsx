@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tweetFormSchema, type TweetFormType } from "@/utils/validators";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
@@ -27,7 +27,8 @@ export default function CreateTweetCard({ profile }: { profile: Profile }) {
     },
   });
 
-  const characterCount = 280 - (form.watch("tweet_text")?.length || 0);
+  const tweetText = useWatch({ control: form.control, name: "tweet_text" });
+  const characterCount = 280 - (tweetText?.length || 0);
 
   const onSubmit = async (data: TweetFormType) => {
     const formData = new FormData();
@@ -57,7 +58,11 @@ export default function CreateTweetCard({ profile }: { profile: Profile }) {
     >
       <CardContent className="p-4">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form
+            onSubmit={event => {
+              void form.handleSubmit(onSubmit)(event);
+            }}
+          >
             <div className="flex">
               <UserInfo
                 avatar={getAvatarUrl(profile.avatar_url)}
