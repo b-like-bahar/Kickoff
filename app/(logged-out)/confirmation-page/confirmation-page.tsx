@@ -3,6 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { Heading1, Text } from "@/components/ui/typography";
 
+// Note: This app currently only links to this page for sign-up confirmation.
+// We keep `forgot-password` here as a ready-to-use hook in case you add a
+// "forgot password" flow later and want to reuse the same confirmation screen.
 type ConfirmationType = "sign-up" | "forgot-password";
 
 export default function ClientConfirmationPage() {
