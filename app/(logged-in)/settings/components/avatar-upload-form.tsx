@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -35,8 +35,8 @@ export function AvatarUploadForm({ currentAvatarUrl }: { currentAvatarUrl: strin
     resolver: zodResolver(avatarFileSchema),
   });
 
-  const { handleSubmit, setValue, watch, reset } = form;
-  const avatarFile = watch("avatar");
+  const { setValue, reset } = form;
+  const avatarFile = useWatch({ control: form.control, name: "avatar" });
 
   // Cleanup object URLs on unmount to prevent memory leaks
   useEffect(() => {
@@ -286,7 +286,12 @@ export function AvatarUploadForm({ currentAvatarUrl }: { currentAvatarUrl: strin
         </div>
 
         <Form {...form}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form
+            onSubmit={event => {
+              void form.handleSubmit(onSubmit)(event);
+            }}
+            className="space-y-6"
+          >
             {/* File Upload Field */}
             <FormField
               control={form.control}
