@@ -1,5 +1,5 @@
 -- ============================================================================
--- SEED DATA FOR TWITTER CLONE APPLICATION
+-- SEED DATA FOR Kickoff APPLICATION
 -- ============================================================================
 -- This file seeds the database with test users and tweets
 -- for development and testing purposes.
