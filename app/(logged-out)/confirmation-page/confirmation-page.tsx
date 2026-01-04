@@ -20,12 +20,28 @@ export default function ClientConfirmationPage() {
 
   return (
     <div
-      className="flex flex-col items-center justify-center h-screen"
+      className="flex min-h-screen items-center justify-center p-6"
       data-testid="confirmation-page"
     >
-      <Heading1 className="text-center">{title}</Heading1>
-      {subTitle && <Text className="text-center">{subTitle}</Text>}
-      <Text className="text-center">{message}</Text>
+      <div className="w-full max-w-lg text-center flex flex-col items-center">
+        <Heading1 className="text-center mb-4">{title}</Heading1>
+
+        {subTitle && (
+          <Text size="md" variant="muted" className="text-center mt-2">
+            {subTitle}
+          </Text>
+        )}
+
+        <Text size="lg" className="text-center mt-4">
+          {message}
+        </Text>
+
+        {type === "sign-up" && (
+          <Text size="md" variant="muted" className="text-center mt-3">
+            If you don&apos;t see the email in your inbox, please check your spam or junk folder.
+          </Text>
+        )}
+      </div>
     </div>
   );
 }
