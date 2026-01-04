@@ -34,8 +34,6 @@ export function ResetPasswordForm({ userEmail }: ResetPasswordFormProps) {
     },
   });
 
-  const { handleSubmit } = form;
-
   const onSubmit: SubmitHandler<ResetPasswordType> = async formValues => {
     const formData = new FormData();
     formData.append("newPassword", formValues.newPassword);
@@ -60,7 +58,12 @@ export function ResetPasswordForm({ userEmail }: ResetPasswordFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={event => {
+          void form.handleSubmit(onSubmit)(event);
+        }}
+        className="space-y-6"
+      >
         <div className="space-y-2">
           <FormLabel>Email</FormLabel>
           <Input value={userEmail} disabled />
