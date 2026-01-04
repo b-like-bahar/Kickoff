@@ -1,29 +1,15 @@
 import { routes } from "@/app/constants";
+import { ToastDismissButtonLabel, ToastTestId } from "@/utils/toast";
 import { expect, Page } from "@playwright/test";
 
 export async function verifyToast(page: Page, text: string) {
-  const locatorName = "[data-sonner-toast]";
-  await page.waitForSelector(locatorName, { state: "visible" });
-  const toast = page.getByText(text);
-  await expect(toast).toBeVisible();
+  const toast = page.getByTestId(ToastTestId).filter({ hasText: text }).first();
+  await expect(toast, "Toast should be visible").toBeVisible();
 
-  const dialog = page.getByRole("dialog");
-  // If there's a dialog open, close it first otherwise the toast will not be targeted
-  if (dialog) {
-    if (await dialog.isVisible()) {
-      await page.keyboard.press("Escape");
-      await expect(dialog).not.toBeVisible();
-    }
-  }
-
-  // Dismiss the toast after verification
-  const dismissButton = page.locator(locatorName).first().getByRole("button", { name: "Dismiss" });
-  // Wait for button to be stable before clicking
-  await dismissButton.waitFor({ state: "visible" });
+  const dismissButton = toast.getByRole("button", { name: ToastDismissButtonLabel });
+  await expect(dismissButton, "Toast dismiss button should be visible").toBeVisible();
   await dismissButton.click();
-
-  // Wait for the toast to disappear
-  await expect(toast).not.toBeVisible();
+  await expect(toast, "Toast should be dismissed").toBeHidden();
 }
 
 export async function signUp(page: Page) {
