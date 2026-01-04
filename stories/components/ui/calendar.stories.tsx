@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { addDays } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
+import { useState, type ComponentProps } from "react";
 import { DateRange } from "react-day-picker";
 
 const meta = {
@@ -29,7 +29,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Components for stories
-const DefaultCalendar = (args: any) => {
+const DefaultCalendar = (args: ComponentProps<typeof Calendar>) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
@@ -40,7 +40,7 @@ const DefaultCalendar = (args: any) => {
   );
 };
 
-const RangeCalendar = (args: any) => {
+const RangeCalendar = (args: ComponentProps<typeof Calendar>) => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 7),
@@ -61,7 +61,7 @@ const RangeCalendar = (args: any) => {
   );
 };
 
-const MultipleCalendar = (args: any) => {
+const MultipleCalendar = (args: ComponentProps<typeof Calendar>) => {
   const [dates, setDates] = useState<Date[] | undefined>([
     new Date(),
     addDays(new Date(), 3),
@@ -80,7 +80,7 @@ const MultipleCalendar = (args: any) => {
   );
 };
 
-const DisabledDatesCalendar = (args: any) => {
+const DisabledDatesCalendar = (args: ComponentProps<typeof Calendar>) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
