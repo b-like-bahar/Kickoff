@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight } from "lucide-react";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useState } from "react";
+import { useState, type ComponentProps } from "react";
 
 const meta = {
   title: "Components/ui/ToggleGroup",
@@ -22,7 +22,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const SingleToggleGroupDemo = (args: any) => {
+const SingleToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
   const [value, setValue] = useState("italic");
 
   return (
@@ -40,7 +40,7 @@ const SingleToggleGroupDemo = (args: any) => {
   );
 };
 
-const MultipleToggleGroupDemo = (args: any) => {
+const MultipleToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
   const [value, setValue] = useState(["bold"]);
 
   return (
@@ -58,7 +58,7 @@ const MultipleToggleGroupDemo = (args: any) => {
   );
 };
 
-const TextAndIconToggleGroupDemo = (args: any) => {
+const TextAndIconToggleGroupDemo = (args: ComponentProps<typeof ToggleGroup>) => {
   const [value, setValue] = useState("left");
 
   return (
