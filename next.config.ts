@@ -21,6 +21,16 @@ const baseConfig: NextConfig = {
       },
     ],
   },
+
+  // Exclude stories directory from Next.js compilation
+  // Stories are preserved for future use when Storybook supports Next.js 16
+  webpack: config => {
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: ["**/stories/**"],
+    };
+    return config;
+  },
 };
 
 let nextConfig = baseConfig;

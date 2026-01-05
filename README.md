@@ -139,7 +139,14 @@ pnpm supabase:generate:types
 
 **Note**: Storybook is currently not compatible with Next.js 16. The project includes Storybook stories in the `stories/` directory that were created when the project used Next.js 15. These stories are preserved for future use once Storybook adds official support for Next.js 16.
 
-Storybook 8.6.x officially supports Next.js up to version 15. When Storybook releases a version that supports Next.js 16, you can reinstall Storybook dependencies and the stories will be ready to use.
+Storybook 8.6.x officially supports Next.js up to version 15. When Storybook releases a version that supports Next.js 16, you can restore Storybook by:
+
+1. Installing Storybook dependencies (see `.storybook/storybook-restore.md` for the complete list)
+2. Uncommenting the Storybook configuration files in `.storybook/`
+3. Uncommenting the Storybook configuration in `vitest.config.ts`
+4. Following the restoration instructions in `.storybook/storybook-restore.md`
+
+All Storybook configuration code is preserved in commented form in the relevant files and ready to be restored when compatible.
 
 To check for Storybook updates and Next.js 16 compatibility, visit the [Storybook GitHub releases](https://github.com/storybookjs/storybook/releases) or [Storybook documentation](https://storybook.js.org/).
 
