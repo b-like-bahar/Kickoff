@@ -1,17 +1,23 @@
 # Kickoff
 
-A modern Next.js template with TypeScript, Tailwind CSS, Storybook, and a comprehensive set of UI components.
+A production-ready Next.js starter template inspired by Twitter, featuring authentication, SEO optimization, analytics, error tracking, Storybook, UI components, Supabase integration, and e2e testing. Built to help developers ship their applications faster—clone this repo and customize it to fit your needs without starting from scratch.
 
 ## Features
 
-- ⚡️ Next.js 15 with App Router
+- ⚡️ Next.js 16 with App Router
+- ⚛️ React 19
 - 🎨 Tailwind CSS 4 with animation support
-- 📚 Storybook for component development
+- 📚 Storybook 8 for component development
 - 🧩 Radix UI components
-- 🎯 TypeScript
-- 📝 ESLint + Prettier
-- 🐶 Husky for git hooks
+- 🎯 TypeScript 5
+- 📝 ESLint 9 + Prettier 3
+- 🐶 Husky 9 for git hooks (with lint-staged)
 - 🎭 Playwright for E2E testing
+- 🗄️ Supabase (authentication, database, storage)
+- 📊 PostHog analytics integration
+- 🔄 TanStack Query (React Query) for data fetching
+- ✅ Zod for schema validation
+- 📋 React Hook Form for form management
 - 🔍 SEO utilities (metadata, sitemap, robots)
 
 ## Prerequisites
@@ -61,13 +67,15 @@ pnpm supabase:db:reset
 pnpm supabase:generate:types
 ```
 
-5. Update your `.env` (values come from `supabase start` output):
+5. Update your `.env` (values come from `supabase status`):
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:55321
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_publishable_key
+SUPABASE_SERVICE_ROLE_KEY=your_secret_key
 ```
+
+**Note**: When you run `supabase status`, you'll see "publishable" and "secret" keys. The **publishable** key is your `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and the **secret** key is your `SUPABASE_SERVICE_ROLE_KEY`.
 
 Optional (SEO + auth redirect URLs):
 
@@ -99,7 +107,7 @@ pnpm dev
 
 The project includes several Supabase-related commands to help with local development:
 
-- `pnpm supabase:start` - Starts the local Supabase development environment. This will spin up all necessary Docker containers and provide you with the anon key and service role key for your `.env` file.
+- `pnpm supabase:start` - Starts the local Supabase development environment. This will spin up all necessary Docker containers.
 
 - `pnpm supabase:stop` - Stops all running Supabase services. Use this when you want to free up system resources or restart the services.
 
@@ -193,22 +201,12 @@ This will download the necessary browser binaries (Chromium, Firefox, WebKit) th
 ### Running Tests
 
 1. Make sure your local development environment is set up (follow the "Getting Started" section above)
-2. Ensure Supabase is running: `pnpm supabase:start`
-3. Reset and seed the DB (recommended): `pnpm supabase:db:reset`
-3. Run the tests:
+2. Run the tests:
    ```bash
    pnpm e2e
    ```
 
 The development server will automatically start when running tests.
-
-## SEO / Analytics
-
-1. Create a new branch for your feature
-2. Make your changes
-3. Run `pnpm format` and `pnpm lint` to ensure code quality
-4. Submit a pull request
-
 
 ## Recommended
 
@@ -231,7 +229,6 @@ When working with Supabase locally, follow these best practices to ensure a smoo
 2. **Environment Variables**
    - Never commit your `.env` file to version control
    - Keep a `.env.example` file with placeholder values
-   - After running `supabase:start`, immediately copy the provided keys to your `.env` file
    - Use different environment variables for development and production
 
 3. **Local Development**
@@ -243,7 +240,7 @@ When working with Supabase locally, follow these best practices to ensure a smoo
 4. **Data Management**
    - Use Row Level Security (RLS) policies from the start
    - Always test RLS policies locally before deploying
-   - Use the Supabase dashboard (available at `http://localhost:54323`) to manage your local database
+   - Use the Supabase dashboard (available at `http://127.0.0.1:55323`) to manage your local database
    - Use seed data for development and testing
 
 5. **TypeScript Types**
@@ -271,67 +268,10 @@ When working with Supabase locally, follow these best practices to ensure a smoo
 
 Remember that your local Supabase instance is for development only. Always test your changes in a staging environment before deploying to production.
 
-## 🔍 SEO Optimization
+## 📚 Architecture & Documentation
 
-This template comes with comprehensive SEO optimization built-in, following Next.js 15 best practices and modern web standards.
+This template includes comprehensive documentation covering architecture, SEO, and analytics:
 
-### ✅ Key Features
-
-- **📋 Advanced Metadata System**: Template-based titles, OpenGraph, and Twitter cards
-- **🗺️ Automatic Sitemap Generation**: Dynamic sitemap.xml with priority-based content organization
-- **🤖 Smart Robots.txt**: Automated generation with custom crawling rules
-- **⚡ Performance Optimized**: WebP/AVIF images, compression, and Core Web Vitals optimization
-- **🔒 Privacy-Aware Indexing**: Public pages discoverable, protected routes secured
-- **📱 Social Media Ready**: Rich previews for Twitter, LinkedIn, and other platforms
-
-### 🚀 Quick Setup
-
-1. **Configure your domain**:
-
-   ```bash
-   # .env
-   NEXT_PUBLIC_APP_URL=https://your-domain.com
-   ```
-
-2. **Build with SEO**:
-
-   ```bash
-   pnpm run build  # Automatically generates sitemap.xml and robots.txt
-   ```
-
-3. **Verify SEO setup**:
-   - Check `/sitemap.xml` for your content structure
-   - Verify `/robots.txt` for crawling rules
-   - Test social previews with [OpenGraph.xyz](https://www.opengraph.xyz/)
-
-### 📊 Performance & Monitoring
-
-The template includes built-in performance optimizations that improve SEO rankings:
-
-- **Image Optimization**: Automatic WebP/AVIF conversion and responsive sizing
-- **Font Performance**: Self-hosted Geist fonts with optimized loading
-- **Core Web Vitals**: Server-side rendering and optimized loading states
-- **Compression**: Gzip compression and ETags for caching
-
-### 🎯 SEO Strategy
-
-Our SEO implementation balances discoverability with user privacy:
-
-- **Public Pages**: Homepage and auth pages are fully indexed
-- **App Content**: Dashboard and user profiles indexed for brand discovery
-- **API Routes**: Automatically excluded from crawling
-- **Dynamic Metadata**: User profiles generate personalized SEO data
-
-### 📖 Complete Documentation
-
-For detailed implementation guides, configuration options, and best practices:
-
-**👉 [View SEO Strategy Documentation](docs/seo-strategy.md)**
-
-The documentation covers:
-
-- Metadata system architecture
-- Sitemap configuration and customization
-- Performance optimization techniques
-- Dynamic content SEO strategies
-- Next.js configuration for SEO
+- **[Server Components Architecture](docs/server-components-architecture.md)** - Server-side rendering patterns, data fetching, actions, revalidation, and loading states
+- **[SEO Strategy](docs/seo-strategy.md)** - Metadata management, sitemap generation, robots.txt configuration, and performance optimization
+- **[Product Analytics](docs/product-analytics.md)** - PostHog integration for tracking user interactions and product metrics
