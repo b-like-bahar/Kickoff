@@ -15,6 +15,7 @@ All Storybook configuration files are commented out and ready to be restored whe
 When Storybook releases a version that supports Next.js 16:
 
 1. **Install Storybook dependencies** in `package.json` (add to `devDependencies`):
+
    ```json
    "@chromatic-com/storybook": "^3",
    "@storybook/addon-essentials": "^8.6.12",
@@ -31,12 +32,14 @@ When Storybook releases a version that supports Next.js 16:
    ```
 
 2. **Add Storybook scripts** to `package.json` (add to `scripts`):
+
    ```json
    "storybook": "storybook dev -p 6006",
    "build-storybook": "storybook build"
    ```
 
 3. **Add Storybook ESLint config** to `package.json` (add to `eslintConfig.extends`):
+
    ```json
    "extends": [
      "plugin:storybook/recommended"
