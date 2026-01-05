@@ -29,7 +29,7 @@ USER_SIGNED_UP: {
 USER_SIGNED_IN: {
   signinMethod: "email";
 }
-GOOGLE_AUTH_INITIATED: {
+GOOGLE_AUTH_SUCCESS: {
   authProvider: "google";
 }
 EMAIL_CONFIRMED: {
@@ -90,7 +90,7 @@ export default async function TimelinePage() {
 
 ## Setup
 
-1. **Environment Variables** (`.env.local`):
+1. **Environment Variables** (`.env`):
 
 ```bash
 NEXT_PUBLIC_POSTHOG_KEY=your_posthog_project_api_key
