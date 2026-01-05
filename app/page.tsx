@@ -17,9 +17,7 @@ export default async function Page() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-8 p-4">
       <div className="text-center max-w-4xl">
         <Heading1>Welcome to Kickoff</Heading1>
-        <Text className="mt-4">
-          Ship your SaaS, web app, or startup faster with Kickoff.
-        </Text>
+        <Text className="mt-4">Ship your SaaS, web app, or startup faster with Kickoff.</Text>
       </div>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link href={routes.publicRoutes.auth}>

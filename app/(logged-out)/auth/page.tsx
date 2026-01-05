@@ -17,9 +17,7 @@ export default function AuthPage() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-8 p-4">
       <div className="text-center max-w-md">
         <Heading1>Get Started</Heading1>
-        <Text className="mt-4">
-          Sign in or create an account to access your app dashboard.
-        </Text>
+        <Text className="mt-4">Sign in or create an account to access your app dashboard.</Text>
       </div>
       <div className="w-full max-w-md">
         <Tabs defaultValue="signin" className="w-full">

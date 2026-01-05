@@ -19,8 +19,6 @@ export const routes: {
   },
 } as const;
 
-export const apiRoutes = {
-} as const;
+export const apiRoutes = {} as const;
 
-export const queryKeys = {
-} as const;
+export const queryKeys = {} as const;
