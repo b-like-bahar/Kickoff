@@ -1,13 +1,12 @@
 # Kickoff
 
-A production-ready Next.js starter template inspired by Twitter, featuring authentication, SEO optimization, analytics, error tracking, Storybook, UI components, Supabase integration, and e2e testing. Built to help developers ship their applications faster—clone this repo and customize it to fit your needs without starting from scratch.
+A production-ready Next.js starter template inspired by Twitter, featuring authentication, SEO optimization, analytics, error tracking, UI components, Supabase integration, and e2e testing. Built to help developers ship their applications faster—clone this repo and customize it to fit your needs without starting from scratch.
 
 ## Features
 
 - ⚡️ Next.js 16 with App Router
 - ⚛️ React 19
 - 🎨 Tailwind CSS 4 with animation support
-- 📚 Storybook 8 for component development
 - 🧩 Radix UI components
 - 🎯 TypeScript 5
 - 📝 ESLint 9 + Prettier 3
@@ -138,19 +137,11 @@ pnpm supabase:generate:types
 
 ## Storybook
 
-This project includes Storybook for component development and documentation. To run Storybook:
+**Note**: Storybook is currently not compatible with Next.js 16. The project includes Storybook stories in the `stories/` directory that were created when the project used Next.js 15. These stories are preserved for future use once Storybook adds official support for Next.js 16.
 
-```bash
-pnpm storybook
-```
+Storybook 8.6.x officially supports Next.js up to version 15. When Storybook releases a version that supports Next.js 16, you can reinstall Storybook dependencies and the stories will be ready to use.
 
-Storybook will be available at [http://localhost:6006](http://localhost:6006).
-
-To build Storybook for production:
-
-```bash
-pnpm build-storybook
-```
+To check for Storybook updates and Next.js 16 compatibility, visit the [Storybook GitHub releases](https://github.com/storybookjs/storybook/releases) or [Storybook documentation](https://storybook.js.org/).
 
 ## Available Scripts
 
@@ -160,8 +151,6 @@ pnpm build-storybook
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Format code with Prettier
 - `pnpm typecheck` - Run TypeScript type checking
-- `pnpm storybook` - Start Storybook
-- `pnpm build-storybook` - Build Storybook for production
 
 ## Project Structure
 
@@ -212,7 +201,7 @@ The development server will automatically start when running tests.
 
 To maintain a high-quality and consistent codebase, please follow these best practices:
 
-- **Add a Storybook story for every new component in the `components/ui` folder.** This ensures all UI components are documented, testable, and easy to preview in isolation.
+- **Component Documentation**: When Storybook support for Next.js 16 is available, add a Storybook story for every new component in the `components/ui` folder. The existing stories in `stories/components/ui/` serve as examples and will be usable once Storybook is reinstalled.
 
 Feel free to expand this section with more best practices as the project evolves.
 
