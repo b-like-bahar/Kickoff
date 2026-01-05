@@ -24,9 +24,9 @@ Our application follows Next.js 15's App Router architecture with a focus on ser
 - **Server Component**: Yes (async function)
 - **Key Features**:
   - Fetches user data server-side using `getCurrentUserWithProfile()` from data layer
-  - Provides user context to all child pages
-  - Renders navigation bar
-  - Throws errors for unauthenticated users
+  - Provides user and profile data to all child pages
+  - Renders navigation bar with user avatar
+  - Route protection is handled by middleware (see Authentication & Middleware section)
 
 ### Route Groups
 
@@ -41,13 +41,12 @@ Our application follows Next.js 15's App Router architecture with a focus on ser
 
 ```typescript
 export default async function LoggedInLayout({ children }: { children: React.ReactNode }) {
-  const user = await getCurrentUserWithProfile();
-  const userId = user.user?.id;
-  if (!userId) throw new Error("User not found");
+  const dbClient = await createClient();
+  const { user, profile } = await getCurrentUserWithProfile(dbClient);
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar avatarUrl={profile?.avatar_url} userId={user.id} />
       <div className="flex container mx-auto py-6 px-4 lg:px-0">
         <main className="w-full">{children}</main>
       </div>
@@ -60,9 +59,10 @@ export default async function LoggedInLayout({ children }: { children: React.Rea
 
 ```typescript
 export default async function TimelinePage() {
-  const user = await getCurrentUserWithProfile();
-  const tweets = await getTweetsForTimeline();
-  const allProfiles = await getAllProfiles();
+  const dbClient = await createClient();
+  const { user, profile } = await getCurrentUserWithProfile(dbClient);
+  const tweets = await getTweetsForTimeline(dbClient);
+  const allProfiles = await getAllProfiles(dbClient);
 
   return (
     // Renders with server-fetched data
@@ -187,9 +187,15 @@ export default function Loading() {
 
 ## Authentication & Middleware
 
-### Middleware (`middleware.ts`)
+### Middleware (`utils/supabase/supabase-middleware.ts`)
+
+The middleware uses `updateSession()` function exported from `utils/supabase/supabase-middleware.ts`. This function should be called from your `middleware.ts` file (if you add one).
 
 ```typescript
+// Example middleware.ts (if you need to add this file)
+import { updateSession } from "@/utils/supabase/supabase-middleware";
+import { type NextRequest } from "next/server";
+
 export async function middleware(request: NextRequest) {
   return await updateSession(request);
 }
@@ -198,8 +204,8 @@ export async function middleware(request: NextRequest) {
 ### Authentication Flow:
 
 1. **Session Management**: Middleware updates user sessions on each request
-2. **Route Protection**: Layout-level authentication checks
-3. **Error Handling**: Throws errors for unauthenticated users
+2. **Route Protection**: Middleware redirects unauthenticated users from protected routes
+3. **Layout Data Fetching**: Logged-in layout fetches user data server-side
 4. **Client-Side Auth**: React Query for client-side auth state
 
 ## Performance Optimizations
@@ -272,18 +278,27 @@ app/
 ├── (logged-in)/
 │   ├── layout.tsx               # Authenticated layout
 │   ├── loading.tsx              # Loading UI for logged-in routes
-│   └── timeline/
-│       ├── page.tsx             # Timeline page (server component)
-│       ├── loading.tsx          # Timeline-specific loading
-│       ├── timeline-actions.ts  # Server actions
-│       └── components/          # Client components
+│   ├── timeline/
+│   │   ├── page.tsx             # Timeline page (server component)
+│   │   ├── loading.tsx          # Timeline-specific loading
+│   │   ├── timeline-actions.ts  # Server actions
+│   │   └── components/          # Client components
+│   ├── settings/
+│   │   ├── page.tsx             # Settings page
+│   │   ├── settings-actions.ts  # Settings server actions
+│   │   └── components/          # Settings components
+│   └── user/[id]/
+│       ├── page.tsx             # User profile page
+│       └── loading.tsx          # Profile loading UI
 ├── (logged-out)/
-│   └── auth/
-│       └── page.tsx             # Public auth page
+│   ├── auth/
+│   │   ├── page.tsx             # Public auth page
+│   │   └── auth-actions.ts      # Auth server actions
+│   └── confirmation-page/
+│       └── page.tsx             # Email confirmation page
 └── auth/                        # Auth API routes
-    ├── confirm/route.ts
-    ├── delete-account/route.ts
-    └── signout/route.ts
+    ├── callback/route.ts        # OAuth callback handler
+    └── confirm/route.ts         # Email confirmation handler
 
 utils/
 ├── actions-utils.ts             # Action utilities
