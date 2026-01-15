@@ -1,6 +1,6 @@
 # Kickoff
 
-A production-ready Next.js starter template inspired by Twitter, featuring authentication, SEO optimization, analytics, error tracking, UI components, Supabase integration, and e2e testing. Built to help developers ship their applications faster—clone this repo and customize it to fit your needs without starting from scratch.
+A production-ready Next.js starter template inspired by Twitter, featuring authentication, SEO optimization, analytics, error tracking, UI components, Supabase integration, and e2e testing. Built to help developers ship their applications faster, clone this repo and customize it to fit your needs without starting from scratch.
 
 ## Features
 
